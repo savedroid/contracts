@@ -17,8 +17,10 @@ contract('SvdPreSale', function ([_, investor, wallet, purchaser, whitelister]) 
 
   const minWei = ether('0.01');
   const maxWei = ether('10');
+  const minWhitelist = ether(1.1);
 
   const value = ether(2)
+  const smallValue = ether(1)
 
   before(async function() {
     //Advance to the next block to correctly read time in the solidity "now" function interpreted by testrpc
@@ -35,6 +37,7 @@ contract('SvdPreSale', function ([_, investor, wallet, purchaser, whitelister]) 
       this.endTime,
       minWei,
       maxWei,
+      minWhitelist,
       whitelister,
       wallet);
 
@@ -58,6 +61,20 @@ contract('SvdPreSale', function ([_, investor, wallet, purchaser, whitelister]) 
 
     it('should only allow whitelister to change whitelist', async function () {
       await this.crowdsale.setInvestorWhitelist(purchaser, true).should.be.rejectedWith(EVMRevert);
+    })
+
+    it('big investments with whitelist', async function () {
+      await increaseTimeTo(this.startTime)
+      // await this.crowdsale.setInvestorWhitelist(investor, false, {from: whitelister});
+      await this.crowdsale.setInvestorWhitelist(investor, false, {from: whitelister});
+      await this.crowdsale.sendTransaction({value: value, from: investor}).should.be.rejectedWith(EVMRevert)
+    })
+
+    it('small investments without whitelist', async function () {
+      await increaseTimeTo(this.startTime)
+      // await this.crowdsale.setInvestorWhitelist(investor, false, {from: whitelister});
+      await this.crowdsale.setInvestorWhitelist(investor, false, {from: whitelister});
+      await this.crowdsale.sendTransaction({value: smallValue, from: investor}).should.be.fulfilled
     })
 
     it('whitelist can be reverted', async function () {

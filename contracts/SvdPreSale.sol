@@ -32,6 +32,8 @@ contract SvdPreSale is Pausable {
     // total amount of funds raised (in wei)
     uint256 public weiRaised;
 
+    uint256 public minWeiWhitelistInvestment;
+
     uint256 public minWeiInvestment;
     uint256 public maxWeiInvestment;
 
@@ -60,6 +62,7 @@ contract SvdPreSale is Pausable {
      * @param _endTime the time to begin the crowdsale in seconds since the epoch. Must be later than _startTime.
      * @param _minWeiInvestment the minimum amount for one single investment (in Wei)
      * @param _maxWeiInvestment the maximum amount for one single investment (in Wei)
+     * @param _minWeiWhitelistInvestment investments equal/greater than this must have the benificiary whitelisted
      * @param _whitelister the address of the account allowed to add and remove from whitelist
      * @param _wallet the address to which funds will be directed to
      */
@@ -67,6 +70,7 @@ contract SvdPreSale is Pausable {
         uint256 _endTime,
         uint256 _minWeiInvestment,
         uint256 _maxWeiInvestment,
+        uint256 _minWeiWhitelistInvestment,
         address _whitelister,
         address _wallet) public {
         /* require(_startTime >= now); */
@@ -82,6 +86,7 @@ contract SvdPreSale is Pausable {
 
         minWeiInvestment = _minWeiInvestment;
         maxWeiInvestment = _maxWeiInvestment;
+        minWeiWhitelistInvestment = _minWeiWhitelistInvestment;
 
         wallet = _wallet;
     }
@@ -98,10 +103,13 @@ contract SvdPreSale is Pausable {
      */
     function buyTokens(address beneficiary) public whenNotPaused payable {
         require(beneficiary != address(0));
-        require(investorWhitelist[beneficiary]);
         require(validPurchase());
 
         uint256 weiAmount = msg.value;
+
+        if (weiAmount >= minWeiWhitelistInvestment) {
+            require(investorWhitelist[beneficiary]);
+        }
 
         // track how much wei is raised in total
         weiRaised = weiRaised.add(weiAmount);
@@ -119,7 +127,7 @@ contract SvdPreSale is Pausable {
      * @return true if crowdsale event has started
      */
     function hasStarted() public view returns (bool) {
-        return now > startTime;
+        return now >= startTime;
     }
 
     /**
