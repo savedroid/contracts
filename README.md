@@ -13,9 +13,29 @@ npm i
 npm install -g truffle
 ```
 
+### Further Preparations for Rinkeby
+
+To run geth on the Rinkeby testnet, enter the geth console:
+```
+geth --rinkeby --fast --rpc console
+```
+
+To create an account on the Rinkeby testnet, enter:
+```
+personal.newAccount()
+```
+
+Enter a passphrase, repeat it and remember it. Your new address will be displayed.
+Unlock your new account:
+```
+personal.unlockAccount("0x...")
+```
+
+Copy the account and paste it into the truffle.js file in the "from" field. Transfer some funds on the Rinkeby testnet to the new address.
+
 ### Deploy
 
-First, compile the contract:
+Open a new Terminal. First, compile the contract:
 ```
 truffle compile
 ```
@@ -35,6 +55,7 @@ truffle migrate --network rinkeby
 
 ### Minting
 
+In order to mint the tokens, the token contract is required (which is as of January 10th not yet the case).
 To mint tokens, prepare a JSON file `distribution.json`. For example:
 ```json
 {
@@ -74,7 +95,7 @@ truffle test
 *Due to use of testrpc’s `evm_increaseTime`, you should restart testrpc after each run of tests.*
 
 
-## Ropsten testnet setup
+## Rinkeby testnet setup
 
 1. Install geth: https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum
 1. Run it on the Rinkeby testnet:
@@ -83,11 +104,11 @@ truffle test
     ```
 1. Find in the beginning of the geth log a line like this one:
     ```
-    IPC endpoint opened: /Users/username/Library/Ethereum/testnet/geth.ipc
+    IPC endpoint opened: <path_to_ipc>/geth.ipc
     ```
 1. Open another terminal and run (using the file path from the previous step):
     ```
-    geth attach /Users/username/Library/Ethereum/testnet/geth.ipc
+    geth attach <path_to_ipc>/geth.ipc
     ```
 1. Wait for the blockchain to sync. In the geth log, it looks like:
     ```
