@@ -59,7 +59,7 @@ contract SvdPreSale is Pausable {
     /**
      * @dev Constructor
      * @param _startTime the time to begin the crowdsale in seconds since the epoch
-     * @param _endTime the time to begin the crowdsale in seconds since the epoch. Must be later than _startTime.
+     * @param _endTime the time to end the crowdsale in seconds since the epoch. Must be later than _startTime.
      * @param _minWeiInvestment the minimum amount for one single investment (in Wei)
      * @param _maxWeiInvestment the maximum amount for one single investment (in Wei)
      * @param _minWeiWhitelistInvestment investments equal/greater than this must have the benificiary whitelisted
@@ -139,7 +139,7 @@ contract SvdPreSale is Pausable {
     }
 
     /**
-     * @dev Allow addresses to do early participation.
+     * @dev Allow addresses to invest over minWeiWhitelistInvestment.
      * @param addr the address to be (de)whitelisted
      * @param status the status value, true if it is whitelisted, false otherwise
      */
