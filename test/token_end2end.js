@@ -1,7 +1,7 @@
 import assertRevert from './helpers/assertRevert'
 import expectThrow from './helpers/expectThrow';
 var SvdToken = artifacts.require('SvdToken');
-var SvdVesting = artifacts.require('SvdVesting');
+//var SvdVesting = artifacts.require('SvdVesting');
 const EVMRevert = require('./helpers/EVMRevert.js')
 import latestTime from './helpers/latestTime';
 // import { increaseTimeTo, duration } from './helpers/increaseTime';
@@ -78,7 +78,7 @@ contract('SvdToken End2End', function(accounts) {
     assert.equal(secondAccountBalance, 60);
   });
 
-  it('should work with vesting contract', async function() {
+  /*it('should work with vesting contract', async function() {
 
     let startTime = latestTime();// + t.duration.minutes(1); //((new Date()).getTime() / 1000);
     let cliff = 200; //t.duration.years(1);
@@ -112,7 +112,7 @@ contract('SvdToken End2End', function(accounts) {
     investor1Balance.should.be.bignumber.above(0)
 
 
-  })
+  })*/
 
 
 })
