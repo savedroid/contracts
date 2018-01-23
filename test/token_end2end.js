@@ -53,7 +53,7 @@ contract('SvdToken End2End', function(accounts) {
 
     // var paused = await token.pause
     assert.equal(mintingFinished, false);
-    console.log("unpause")
+    // console.log("unpause")
 
 
     // 4. unpause
@@ -75,7 +75,7 @@ contract('SvdToken End2End', function(accounts) {
     assert.equal(firstAccountBalance, 90);
 
     let secondAccountBalance = await token.balanceOf(investor2);
-    assegrt.equal(secondAccountBalance, 60);
+    assert.equal(secondAccountBalance, 60);
   });
 
   it('should work with vesting contract', async function() {

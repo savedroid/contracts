@@ -9,7 +9,7 @@ import "../node_modules/zeppelin-solidity/contracts/math/SafeMath.sol";
  * @title SvdToken
  * @dev Savedroid's ERC20 Token.
  * Besides the standard ERC20 functionality, the token allows minting, batch minting and burning.
- * The contract is also pausable, impacting transfer/approve and burning functionality.
+ * The contract is also pausable, impacting transfer/approve and burning functionalities.
  *
  * This contract is heavily based on the Open Zeppelin contracts: Pausable, MintableToken.
  */
@@ -23,11 +23,6 @@ contract SvdToken is MintableToken, Pausable {
     uint8 public constant DECIMALS = 18;
 
     uint256 public constant CAP = 10000000000000000000000000000;
-
-    modifier whenMintingFinished() {
-        require(mintingFinished);
-        _;
-    }
 
     /**
      * @dev Function to batch mint tokens
@@ -46,7 +41,7 @@ contract SvdToken is MintableToken, Pausable {
     }
 
     /**
-    * @dev transfer token for a specified address when the contract is not paused or the minting is finished.
+    * @dev transfer token for a specified address when the contract is not paused.
     * @param _to The address to transfer to.
     * @param _value The amount to be transferred.
     */
@@ -57,7 +52,7 @@ contract SvdToken is MintableToken, Pausable {
     }
 
     /**
-     * @dev Transfer tokens from one address to another when the contract is not paused or the minting is finished.
+     * @dev Transfer tokens from one address to another when the contract is not paused.
      * @param _from address The address which you want to send tokens from
      * @param _to address The address which you want to transfer to
      * @param _value uint256 the amount of tokens to be transferred
@@ -69,9 +64,8 @@ contract SvdToken is MintableToken, Pausable {
     }
 
     /**
-     * @dev Approve the passed address to spend the specified amount of tokens on behalf of msg.sender.
-     * when the contract is not paused or the minting is finished.
-     *
+     * @dev Approve the passed address to spend the specified amount of tokens on
+     * behalf of msg.sender when the contract is not paused.
      * @param _spender The address which will spend the funds.
      * @param _value The amount of tokens to be spent.
      */
@@ -83,7 +77,7 @@ contract SvdToken is MintableToken, Pausable {
 
     /**
      * @dev Increase the amount of tokens that an owner allowed to a spender
-     * when the contract is not paused or the minting is finished.
+     * when the contract is not paused.
      * @param _spender The address which will spend the funds.
      * @param _addedValue The amount of tokens to increase the allowance by.
      */
@@ -95,7 +89,7 @@ contract SvdToken is MintableToken, Pausable {
 
     /**
      * @dev Decrease the amount of tokens that an owner allowed to a spender
-     * when the contract is not paused or the minting is finished.
+     * when the contract is not paused.
      * @param _spender The address which will spend the funds.
      * @param _subtractedValue The amount of tokens to decrease the allowance by.
      */
