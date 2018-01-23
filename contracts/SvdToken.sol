@@ -1,17 +1,15 @@
 pragma solidity 0.4.18;
 
-import '../node_modules/zeppelin-solidity/contracts/token/MintableToken.sol';
-import '../node_modules/zeppelin-solidity/contracts/lifecycle/Pausable.sol';
-import '../node_modules/zeppelin-solidity/contracts/math/SafeMath.sol';
+import "../node_modules/zeppelin-solidity/contracts/token/MintableToken.sol";
+import "../node_modules/zeppelin-solidity/contracts/lifecycle/Pausable.sol";
+import "../node_modules/zeppelin-solidity/contracts/math/SafeMath.sol";
 
 
 /**
  * @title SvdToken
  * @dev Savedroid's ERC20 Token.
- * Besides the standard ERC20 functionality, the token allows minting in a first
- * instance, burning tokens, as well as
- * The contract is also pausable. This affects transfer / approve functionality, as
- * well as burning and minting.
+ * Besides the standard ERC20 functionality, the token allows minting, batch minting and burning.
+ * The contract is also pausable, impacting transfer/approve and burning functionality.
  *
  * This contract is heavily based on the Open Zeppelin contracts: Pausable, MintableToken.
  */
