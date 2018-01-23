@@ -1,7 +1,7 @@
 {
-  "name": "complextoken",
+  "name": "Savedroid ICO smart contracts",
   "version": "1.0.0",
-  "description": "A mock token test",
+  "description": "The smart contracts for Savedroid's ICO http://ico.savedroid.com",
   "main": "truffle.js",
   "directories": {
     "test": "test"
@@ -32,6 +32,6 @@
     "mysql": "^2.15.0",
     "solc": "^0.4.19",
     "truffle-flattener": "^1.2.0",
-    "zeppelin-solidity": "^1.4.0"
+    "zeppelin-solidity": "^1.5.0"
   }
 }
