@@ -122,6 +122,21 @@ contract('SvdToken Mint', function(accounts) {
     assert.equal(totalSupply, 0);
   })
 
+  it('batch mint is transactional', async function() {
+    // console.log([accounts[0], accounts[1]], [100, 50])
+    const result = await expectThrow( token.batchMint([accounts[0], accounts[1], 0], [100, 60, -122]) );
+    console.log(result)
+
+    let balance0 = await token.balanceOf(accounts[0]);
+    assert.equal(balance0, 0);
+
+    let balance1 = await token.balanceOf(accounts[1]);
+    assert.equal(balance1, 0);
+
+    let totalSupply = await token.totalSupply();
+    assert.equal(totalSupply, 0);
+  })
+
   it('should fail to mint after call to finishMinting', async function () {
     await token.finishMinting();
     assert.equal(await token.mintingFinished(), true);

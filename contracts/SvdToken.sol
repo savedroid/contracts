@@ -35,6 +35,7 @@ contract SvdToken is MintableToken, Pausable {
     returns (bool) {
         require(_to.length == _amount.length);
         for (uint i = 0; i < _to.length; i++) {
+            require(_to[i] != address(0));
             require(mint(_to[i], _amount[i]));
         }
         return true;
