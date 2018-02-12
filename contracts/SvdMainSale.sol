@@ -37,7 +37,7 @@ contract SvdMainSale is Pausable {
      * @param beneficiary who got the tokens
      * @param value weis paid for purchase
      */
-    event Investment(address indexed purchaser,
+    event LogInvestment(address indexed purchaser,
         address indexed beneficiary,
         uint256 value);
 
@@ -106,7 +106,7 @@ contract SvdMainSale is Pausable {
         // track how much was transfered by the specific investor
         investments[beneficiary] = investments[beneficiary].add(weiAmount);
 
-        Investment(msg.sender, beneficiary, weiAmount);
+        LogInvestment(msg.sender, beneficiary, weiAmount);
 
         forwardFunds();
     }

@@ -16,7 +16,7 @@ import "../node_modules/zeppelin-solidity/contracts/math/SafeMath.sol";
 contract SvdToken is MintableToken, Pausable {
     using SafeMath for uint256;
 
-    event Burn(address indexed burner, uint256 value);
+    event LogBurn(address indexed burner, uint256 value);
 
     string public constant NAME = "savedroid";
     string public constant SYMBOL = "SVD";
@@ -130,7 +130,7 @@ contract SvdToken is MintableToken, Pausable {
         address burner = msg.sender;
         balances[burner] = balances[burner].sub(_value);
         totalSupply = totalSupply.sub(_value);
-        Burn(burner, _value);
+        LogBurn(burner, _value);
     }
 
 
