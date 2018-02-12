@@ -1,5 +1,5 @@
 {
-  "name": "Savedroid ICO smart contracts",
+  "name": "savedroid-ico-smart-contracts",
   "version": "1.0.0",
   "description": "The smart contracts for Savedroid's ICO http://ico.savedroid.com",
   "main": "truffle.js",
