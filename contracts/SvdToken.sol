@@ -1,8 +1,8 @@
 pragma solidity 0.4.18;
 
-import "../node_modules/zeppelin-solidity/contracts/token/MintableToken.sol";
-import "../node_modules/zeppelin-solidity/contracts/lifecycle/Pausable.sol";
-import "../node_modules/zeppelin-solidity/contracts/math/SafeMath.sol";
+import "zeppelin-solidity/contracts/token/ERC20/MintableToken.sol";
+import "zeppelin-solidity/contracts/lifecycle/Pausable.sol";
+import "zeppelin-solidity/contracts/math/SafeMath.sol";
 
 
 /**
@@ -111,7 +111,7 @@ contract SvdToken is MintableToken, Pausable {
     canMint
     returns (bool) {
         require(_amount > 0);
-        require(totalSupply.add(_amount) <= CAP);
+        require(totalSupply_.add(_amount) <= CAP);
         return super.mint(_to, _amount);
     }
 
@@ -129,7 +129,7 @@ contract SvdToken is MintableToken, Pausable {
 
         address burner = msg.sender;
         balances[burner] = balances[burner].sub(_value);
-        totalSupply = totalSupply.sub(_value);
+        totalSupply_ = totalSupply_.sub(_value);
         Burn(burner, _value);
     }
 
