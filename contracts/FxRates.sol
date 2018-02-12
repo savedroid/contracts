@@ -23,7 +23,7 @@ contract FxRates is Ownable {
      * @param timestamp human readable timestamp of the earliest validity time
      * @param rate a string containing the rate value
      */
-    event RateUpdate(string symbol, uint256 updateNumber, string timestamp, string rate);
+    event LogRateUpdate(string symbol, uint256 updateNumber, string timestamp, string rate);
 
     uint256 public numberBtcUpdates = 0;
 
@@ -44,7 +44,7 @@ contract FxRates is Ownable {
             rate: _rate,
             timestamp: _timestamp
         });
-        RateUpdate("ETH", numberEthUpdates, _timestamp, _rate);
+        LogRateUpdate("ETH", numberEthUpdates, _timestamp, _rate);
     }
 
     /**
@@ -58,7 +58,7 @@ contract FxRates is Ownable {
             rate: _rate,
             timestamp: _timestamp
         });
-        RateUpdate("BTC", numberBtcUpdates, _timestamp, _rate);
+        LogRateUpdate("BTC", numberBtcUpdates, _timestamp, _rate);
     }
 
     /**

@@ -45,7 +45,7 @@ contract SvdPreSale is Pausable {
      * @param beneficiary who got the tokens
      * @param value weis paid for purchase
      */
-    event Investment(address indexed purchaser,
+    event LogInvestment(address indexed purchaser,
         address indexed beneficiary,
         uint256 value);
 
@@ -54,7 +54,7 @@ contract SvdPreSale is Pausable {
      * @param investor the address that was whitelisted
      * @param status the status value, true if it is whitelisted, false otherwise
      */
-    event Whitelisted(address investor, bool status);
+    event LogWhitelisted(address investor, bool status);
 
     /**
      * @dev Constructor
@@ -117,7 +117,7 @@ contract SvdPreSale is Pausable {
         // track how much was transfered by the specific investor
         investments[beneficiary] = investments[beneficiary].add(weiAmount);
 
-        Investment(msg.sender, beneficiary, weiAmount);
+        LogInvestment(msg.sender, beneficiary, weiAmount);
 
         forwardFunds();
     }
@@ -146,7 +146,7 @@ contract SvdPreSale is Pausable {
     function setInvestorWhitelist(address addr, bool status) public {
         require(msg.sender == whitelister);
         investorWhitelist[addr] = status;
-        Whitelisted(addr, status);
+        LogWhitelisted(addr, status);
     }
 
     // send ether (wei) to the fund collection wallet
